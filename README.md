@@ -1,10 +1,7 @@
-# C++ Template
-Generic C++ template with automatic instalation of Raylib, SpdLog & CTest.
+# SS-Tree
+SS-Tree project made for the Advanced Data Structures course @Utec.
 
 
-## Raylib
-
-[required libraries](https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux#install-required-libraries)
 
 
 ## Recomended tools
