@@ -20,6 +20,7 @@ public:
   auto operator*=(float scalar) -> Point &;
   auto operator/(float scalar) const -> Point;
   auto operator/=(float scalar) -> Point &;
+  auto operator==(const Point &other) const -> bool;
 
   [[nodiscard]] auto norm() const -> float;
 

@@ -1,4 +1,4 @@
-#include "../include/Point.hpp"
+#include "Point.hpp"
 #include <algorithm>
 #include <random>
 #include <stdexcept>
@@ -67,6 +67,7 @@ auto Point::operator/(float scalar) const -> Point {
 
   return result;
 }
+
 auto Point::operator/=(float scalar) -> Point & {
   if (scalar - 0 <= EPSILON) {
     throw std::invalid_argument("Division by zero");
@@ -76,6 +77,13 @@ auto Point::operator/=(float scalar) -> Point & {
                          [&scalar](float coord) { return coord / scalar; });
 
   return *this;
+}
+
+auto Point::operator==(const Point &other) const -> bool {
+  return std::ranges::equal(m_coordinates, other.m_coordinates,
+                            [](const float &coord1, const float &coord2) {
+                              return std::abs(coord1 - coord2) <= EPSILON;
+                            });
 }
 
 auto Point::norm() const -> float {

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(
-  CPP_TEMPLATE
+  SS_TREE
   VERSION 1.0
   DESCRIPTION "A C++ template"
   LANGUAGES CXX)
@@ -24,14 +24,16 @@ target_include_directories(${PROJECT_NAME} PUBLIC include/)
 # ##############################################################################
 
 add_library(common INTERFACE)
-target_compile_features(common INTERFACE cxx_std_20)
+target_compile_features(common INTERFACE cxx_std_23)
 
 # TODO: add iwty required - currently not working on windows test due to
 # installation issues
 find_program(iwyu_path NAMES include-what-you-use iwyu)
 set_target_properties(
-  ${PROJECT_NAME} PROPERTIES CXX_INCLUDE_WHAT_YOU_USE ${iwyu_path}
-                             INTERPROCEDURAL_OPTIMIZATION TRUE)
+  ${PROJECT_NAME}
+  PROPERTIES CXX_INCLUDE_WHAT_YOU_USE ${iwyu_path}
+             INTERPROCEDURAL_OPTIMIZATION TRUE
+             CXX_STANDARD 23)
 
 target_compile_options(
   common
@@ -42,6 +44,7 @@ target_compile_options(
             $<$<CXX_COMPILER_ID:Clang>:-Weverything>
             $<$<CXX_COMPILER_ID:GCC>:-fconcepts-diagnostics-depth=3>
             $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:
+            -mavx
             -Werror
             -Wall
             -Wextra
